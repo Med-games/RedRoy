@@ -1,0 +1,77 @@
+{% extends 'crm/base.html' %}
+{% load static%}
+
+{% block content %}
+    <div class="relative w-full overflow-hidden">
+        <video autoplay muted loop id="video-background" class="w-full object-cover">
+            <source src="{% static 'images/video-background.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+    <div class="content relative z-10">
+        <!-- Your content here -->
+    </div>
+
+<div class="seperator w-full">
+    <img src="{% static 'images/ledled.png' %}" alt="" class="w-full">
+</div>
+
+<section class="discover flex flex-col items-center py-12" id="discover">
+    <img src="{% static 'images/header (2).png' %}" alt="" class="w-80 md:w-96 mb-12"> <!-- Adjusted image width for smaller screens -->
+    <div class="container mx-auto flex flex-col space-y-6 md:flex-row bg-gradient-to-r from-red-500 to-gray-100 rounded-md hover:scale-105 transition ease">
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
+            <h1 class="font-bold text-2xl md:text-5xl  ">Red Roy Cofee</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 "style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">our Cultural Café offers a sanctuary where the rich aroma of freshly brewed coffee mingles harmoniously with the essence of culture and creativity. Here, you can indulge in artisanal brews from around the globe, savor cultural concoctions that ignite the senses, and lose yourself in a world of literature and art. With a diverse array of cultural events and a welcoming community of like-minded enthusiasts</p> <!-- Adjusted text size for smaller screens -->
+        </div>
+        <div class="md:w-1/2 flex justify-center items-center">
+            <img src="{% static 'images/cofee.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105" >
+        </div>
+    </div>
+    <div class="container mx-auto flex flex-col space-y-6 md:flex-row mt-3 bg-gradient-to-r from-amber-200 to-red-500  rounded-md  hover:scale-105 transition ease">
+        <div class="md:w-1/2 flex justify-center items-center">
+            <img src="{% static 'images/discover.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md" >
+        </div>
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
+            <h1 class="font-bold text-2xl md:text-5xl">Red Roy Theatre</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6">where the stage comes alive with captivating spectacles and mesmerizing one-man shows. Our intimate theatre space is a sanctuary for theatrical exploration and artistic expression, offering an immersive experience that transcends boundaries and sparks the imagination. From gripping solo performances to compelling theatrical masterpieces, every show promises an unforgettable journey into the realm of storytelling and emotion. Join us for an evening of entertainment, enlightenment, and inspiration at [Your Theatre's Name], where the magic of theatre awaits.</p> <!-- Adjusted text size for smaller screens -->
+        </div>
+    </div>
+    <div class="container mx-auto flex flex-col space-y-6 md:flex-row bg-gradient-to-r from-red-400 to-cyan-500 mt-5 rounded-lg hover:scale-105 transition ease">
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
+            <h1 class="font-bold text-2xl md:text-5xl">Red Roy Cinema</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6"> where every film becomes an unforgettable experience. Step into our state-of-the-art theater, where the silver screen comes alive with the latest blockbusters, timeless classics, and captivating indie gems. From heart-pounding action to heartwarming dramas, our diverse lineup promises something for every movie enthusiast. Immerse yourself in crystal-clear visuals and surround sound, as you lose yourself in the magic of storytelling. Whether you're seeking thrills, laughter, or tears, [Your Cinema's Name] Cinema invites you to sit back, relax, and let the magic of the movies transport you to new worlds and unforgettable adventures. Welcome to a place where every frame is a masterpiece and every visit is a celebration of cinema..</p> <!-- Adjusted text size for smaller screens -->
+        </div>
+        <div class="md:w-1/2 flex justify-center items-center">
+            <img src="{% static 'images/Red roy cinema.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md" >
+        </div>
+    </div>
+</section>
+
+<section class="cards contact py-12 bg-white text-gray-900" id="contact">
+    <div class="container mx-auto">
+        <img class="h-48 md:h-64 w-full object-contain" src="{% static 'images/placee.png'%}" alt="">
+
+        <div class="relative rounded-lg overflow-hidden aspect-w-16 aspect-h-9" style="height: 300px;">
+            <iframe class="absolute inset-0 w-full h-full rounded-lg" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.459485570174!2d10.800818215485062!3d34.773796679224946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1301cda8aa3b20f7%3A0x24cd8a60bd805a49!2s%D9%85%D8%B3%D8%B1%D8%AD%20%D8%B3%D9%8A%D9%86%D9%85%D8%A7%20%D9%85%D9%82%D9%87%D9%89%20Red%20roy%20theater%20cin%C3%A9%20caf%C3%A9%E2%80%AD!5e0!3m2!1sen!2sus!4v1621294551911!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <a href="https://www.google.com/maps/place/مسرح+سينما+مقهى+Red+roy+theater+ciné+café%E2%80%AD/@34.7737967,10.8008182,17z/data=!3m1!4b1!4m6!3m5!1s0x1301cda8aa3b20f7:0x24cd8a60bd805a49!8m2!3d34.7737923!4d10.8033985!16s%2Fg%2F11flqrt8zb?entry=ttu">
+                    <div class="bg-red-500 px-6 py-3 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-2 text-white">Red Roy Theater & Cinema Café</h3>
+                    <p class="text-lg text-white"><p>
+                        {% if request.LANGUAGE_CODE == 'ar' %}
+                            زورنا لتجربة مثيرة!
+                        {% elif request.LANGUAGE_CODE == 'fr' %}
+                            Venez nous rendre visite pour une expérience immersive!
+                        {% else %}
+                            Visit us for an immersive experience!
+                        {% endif %}
+                    </p>
+                    </p>
+                </div>
+            </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

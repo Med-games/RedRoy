@@ -1,0 +1,261 @@
+<!-- templates/crm/reservation.html -->
+{% extends 'crm/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Carousel Section -->
+<section class="relative w-full mx-auto overflow-hidden h-screen">
+    <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 cursor-pointer" onclick="changeImage(-1)">&#10094;</button>
+    <div class="carousel-images flex transition-transform duration-500 h-full">
+        <img src="{% static 'images/1-test.png' %}" alt="" class="w-full flex-shrink-0 object-cover h-full" name="Coffee">
+        <img src="{% static 'images/2-test.png' %}" alt="" class="w-full flex-shrink-0 object-cover h-full" name="Cinema">
+        <img src="{% static 'images/3-test.png' %}" alt="" class="w-full flex-shrink-0 object-cover h-full" name="Thatre">
+    </div>
+    <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 cursor-pointer" onclick="changeImage(1)">&#10095;</button>
+    <button id="reservation-button" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 text-lg font-semibold rounded hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-100 focus:ring-opacity-50">Reservation Now</button>
+</section>
+
+<!-- Reservation Image Section -->
+<section class="container mx-auto flex flex-col items-center py-4">
+    <img class="h-64 md:h-96" src="{% static 'images/reservation.png'%}" alt="Reservation Image">
+</section>
+
+<!-- Reservation Form Section -->
+<!-- Reservation Form Section -->
+<section class="bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg">
+        <h2 class="text-3xl font-semibold text-slate-700 text-center py-4">{% if request.LANGUAGE_CODE == 'fr' %}
+            Formulaire de réservation
+        {% elif request.LANGUAGE_CODE == 'ar' %}
+        استمارة حجز
+        {% else %}
+        Reservation Form
+        {% endif %}</h2>
+        <div id="availability-message" class="text-center py-2 text-red-500"></div>
+        <form id="reservation-form" method="post" class="space-y-4 p-6">
+          {% csrf_token %}
+          <div>
+              <label for="name" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                الاسم
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Nom
+            {% else %}
+                Name
+            {% endif %}</label>
+              <input type="text" id="name" name="name" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" value="{{ name }}" required>
+          </div>
+          <div>
+            {% if request.LANGUAGE_CODE == 'ar' %}
+            البريد الإلكتروني
+        {% elif request.LANGUAGE_CODE == 'fr' %}
+            Email
+        {% else %}
+            Email
+        {% endif %}              <input type="email" id="email" name="email" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" value="{{ email }}" required>
+          </div>
+          <div>
+              <label for="phone" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                رقم الهاتف
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Téléphone
+            {% else %}
+                Phone
+            {% endif %}</label>
+              <input type="tel" id="phone" name="phone" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required pattern="[0-9]{8}">
+          </div>
+          <div>
+              <label for="places" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                عدد الأماكن
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Nombre de places
+            {% else %}
+                Places Number
+            {% endif %}</label>
+              <input type="number" id="places" name="places" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required>
+          </div>
+          <div>
+              <label for="espace" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                نوع الفضاء
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Type d'espace
+            {% else %}
+                Espace Type
+            {% endif %}</label>
+              <select id="espace" name="espace" class="form-select mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required>
+                  <option value="cinema">{% if request.LANGUAGE_CODE == 'ar' %}
+                    سينما
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Cinéma
+                {% else %}
+                    Cinema
+                {% endif %}</option>
+                  <option value="coffee">{% if request.LANGUAGE_CODE == 'ar' %}
+                    المقهى الثقافي
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Café culturelle
+                {% else %}
+                    cultural coffee
+                {% endif %}</option>
+                  <option value="theatre">{% if request.LANGUAGE_CODE == 'ar' %}
+                    مسرح
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Théâtre
+                {% else %}
+                    Theatre
+                {% endif %}</option>
+              </select>
+          </div>
+          <div>
+              <label for="association" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                اسم الجمعية
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Nom de l'association
+            {% else %}
+                Association Name
+            {% endif %}</label>
+              <input type="text" id="association" name="association" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required>
+          </div>
+          <div>
+              <label for="date" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                التاريخ
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Date
+            {% else %}
+                Date
+            {% endif %}</label>
+              <input type="date" id="date" name="date" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required>
+          </div>
+          <div>
+              <label for="time" class="block text-slate-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                الوقت
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Heure
+            {% else %}
+                Time
+            {% endif %}</label>
+              <input type="time" id="time" name="time" class="form-input mt-1 block w-full rounded-md bg-gray-100 border-gray-300 focus:border-red-500 focus:ring focus:ring-red-200 focus:ring-opacity-50 text-slate-700" required>
+          </div>
+          <div>
+              <button type="submit" id="submit-btn" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 w-full">{% if request.LANGUAGE_CODE == 'ar' %}
+                إرسال
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Soumettre
+            {% else %}
+                Submit
+            {% endif %}</button>
+          </div>
+      </form>
+    </div>
+</section>
+  
+  
+  
+
+<!-- Popup Section -->
+<section id="popup-section" class="hidden fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div id="popup-modal" class="relative bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+        <button type="button" class="absolute top-2 right-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center" data-modal-hide="popup-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+        <div class="text-center">
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to submit this reservation?</h3>
+            <button data-confirm="confirm" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">Yes, I'm sure</button>
+            <button data-confirm="cancel" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    // JavaScript for Image Carousel
+let currentIndex = 0;
+const images = document.querySelectorAll('.carousel-images img');
+const totalImages = images.length;
+
+function changeImage(direction) {
+    currentIndex = (currentIndex + direction + totalImages) % totalImages;
+    images.forEach((image, index) => {
+        if (index === currentIndex) {
+            image.style.display = 'block';
+        } else {
+            image.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('.absolute.left-2').addEventListener('click', () => changeImage(-1));
+document.querySelector('.absolute.right-2').addEventListener('click', () => changeImage(1));
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("reservation-form");
+        const section = document.getElementById("popup-section");
+        const modal = section.querySelector("#popup-modal");
+        const submitBtn = document.getElementById("submit-btn");
+        let submitClicked = false;
+    
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            // Add logic here to submit the form data using AJAX or other methods
+    
+            // Show the modal only if the submit button has been clicked
+            if (submitClicked) {
+                showModal();
+            }
+        });
+    
+        function showModal() {
+            section.classList.remove("hidden");
+        }
+    
+        function hideModal() {
+            section.classList.add("hidden");
+        }
+    
+        // Close modal when clicking on the close button
+        modal.querySelector("[data-modal-hide='popup-modal']").addEventListener("click", function() {
+            hideModal();
+        });
+    
+        // Close modal when clicking outside of it
+        modal.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+    
+        // Close modal when pressing the Escape key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                hideModal();
+            }
+        });
+    
+        // Set submitClicked flag to true when submit button is clicked
+        submitBtn.addEventListener("click", function(event) {
+            submitClicked = true;
+        });
+    
+        // Handle form submission confirmation
+        modal.querySelector("[data-confirm='confirm']").addEventListener("click", function() {
+            if (submitClicked) {
+                form.submit(); // Submit the form
+            }
+        });
+    
+        // Handle cancellation of form submission
+        modal.querySelector("[data-confirm='cancel']").addEventListener("click", function() {
+            submitClicked = false; // Reset submitClicked flag
+            hideModal(); // Hide the modal
+        });
+    });
+    </script>
+    
+
+{% endblock %}

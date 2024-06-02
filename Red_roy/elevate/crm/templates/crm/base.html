@@ -1,0 +1,445 @@
+{% load static tailwind_tags %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ language.code }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
+
+    {% tailwind_css %}
+    <style>
+        
+        .d {
+            background-image: url("{% static 'images/what.png' %}");
+        }
+     
+
+    </style>
+</head>
+
+<body class="font-poppins" >
+    <script>
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            document.getElementById('languageForm').submit(); 
+        });
+        </script>
+    <header id='header' class="w-full fixed z-50 flex justify-between items-center px-4 md:px-20  shadow-lg ">
+        <a href="{% url 'home' %}" class="logo"><img src="{% static 'images/cirlce (2).png' %}" alt="" class="w-16 md:w-24"></a>
+        <button onclick="toggleModal('menuModal')" class="md:hidden text-gray-700 focus:outline-none"><i class="ri-menu-line text-xl"></i></button>
+        <nav class="navigation flex space-x-4 hidden md:flex">
+            <a href="{% url 'home' %}" class="text-red-600 font-bold px-4 py-2 rounded-full {% if request.path == '/en/' or request.path == '/ar/' or request.path == '/fr/'  %} bg-red-700 text-white {% else %} bg-white hover:bg-red-700 hover:text-white {% endif %}">{% if request.LANGUAGE_CODE == 'ar' %}
+                الرئيسية
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Accueil
+            {% else %}
+                Home
+            {% endif %}</a>
+            <a href="{% url 'events' %}" class="text-red-600 font-bold px-4 py-2 rounded-full {% if request.path == '/en/events/' or request.path == '/ar/events/' or request.path == '/fr/events/'  %} bg-red-700 text-white {% else %} bg-white hover:bg-red-700 hover:text-white {% endif %}">{% if request.LANGUAGE_CODE == 'ar' %}
+                البرامج
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Événements
+            {% else %}
+                Events
+            {% endif %}</a>
+            <a href="{% url 'reservation' %}" class="text-red-600 font-bold px-4 py-2 rounded-full {% if request.path == '/en/reservation/' or request.path == '/ar/reservation/' or request.path == '/fr/reservation/'  %} bg-red-700 text-white {% else %} bg-white hover:bg-red-700 hover:text-white {% endif %}">  {% if request.LANGUAGE_CODE == 'ar' %}
+                الحجز
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Réservation
+            {% else %}
+                Reservation
+            {% endif %}</a>
+            <a href="{% url 'posts' %}" class="text-red-600 font-bold px-4 py-2 rounded-full {% if request.path == '/en/posts/' or request.path == '/ar/posts/' or request.path == '/fr/posts/'  %} bg-red-700 text-white {% else %} bg-white hover:bg-red-700 hover:text-white {% endif %}">{% if request.LANGUAGE_CODE == 'ar' %}
+                المدونات
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Blogs
+            {% else %}
+                Blogs
+            {% endif %}</a>
+
+            {% if user.is_authenticated %}
+                <div class="flex items-center space-x-4 ">
+                    <div class="bg-zinc-200 rounded-md">
+                        <i class="ri-user-line "></i>
+                        <span class="text-red-600 font-bold  " >{% if user.email == 'adminv8redroy@gmail.com' %}<a href="{% url 'v8_template' %}">{{ user.username }}</a>{% endif %}</span>
+                    </div>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"> {% if request.LANGUAGE_CODE == 'ar' %}
+                            تسجيل الخروج
+                        {% elif request.LANGUAGE_CODE == 'fr' %}
+                            Déconnexion
+                        {% else %}
+                            Logout
+                        {% endif %} </button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="#" class="text-red-600 font-bold px-4 py-2 rounded-full bg-white  hover:bg-red-700 hover:text-white " onclick="toggleModal('loginModal')">{% if request.LANGUAGE_CODE == 'ar' %}
+                    تسجيل الدخول
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Connexion
+                {% else %}
+                    Login
+                {% endif %}</a>
+                <a href="#" class="text-red-600 font-bold px-4 py-2 rounded-full bg-white  hover:bg-red-700 hover:text-white" onclick="toggleModal('registerModal')">{% if request.LANGUAGE_CODE == 'ar' %}
+                    تسجيل
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    S'inscrire
+                {% else %}
+                    Register
+                {% endif %}</a>
+            {% endif %}
+            <div class="flex items-center space-x-">
+                <form id="languageForm" action="{% url 'set_language' %}" method="post" >
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+                    <select name="language" id="languageSelect" class="rounded-md text-red-800">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </nav>
+    </header>
+    {% block content %}{% endblock %}
+
+    <!-- Mobile Menu Modal -->
+    <div id="menuModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="relative bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <button onclick="toggleModal('menuModal')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <nav class="md:hidden flex flex-col space-y-4">
+                <a href="{% url 'events' %}" class="text-red-600 font-bold">{% if request.LANGUAGE_CODE == 'ar' %}
+                    الأحداث
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Événements
+                {% else %}
+                    Events
+                {% endif %}</a>
+                <a href="{% url 'reservation' %}" class="text-red-600 font-bold"> {% if request.LANGUAGE_CODE == 'ar' %}
+                    الحجز
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Réservation
+                {% else %}
+                    Reservation
+                {% endif %}</a>
+                <a href="{% url 'posts' %}" class="text-red-600 font-bold">  {% if request.LANGUAGE_CODE == 'ar' %}
+                    المدونات
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Blogs
+                {% else %}
+                    Blogs
+                {% endif %}</a>
+                <a href="#" class="text-red-600 font-bold" onclick="toggleModal('loginModal')">{% if request.LANGUAGE_CODE == 'ar' %}
+                    تسجيل الخروج
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Déconnexion
+                {% else %}
+                    Logout
+                {% endif %}</a>
+            </nav>
+        </div>
+    </div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="relative bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <button onclick="toggleModal('loginModal')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4">{% if request.LANGUAGE_CODE == 'ar' %}
+            تسجيل الدخول
+        {% elif request.LANGUAGE_CODE == 'fr' %}
+            Connexion
+        {% else %}
+            Login
+        {% endif %}</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                    اسم المستخدم
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Nom d'utilisateur
+                {% else %}
+                    Username
+                {% endif %}</label>
+                <input type="text" name="username" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700"> {% if request.LANGUAGE_CODE == 'ar' %}
+                    كلمة المرور
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Mot de passe
+                {% else %}
+                    Password
+                {% endif %}</label>
+                <input type="password" name="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="flex justify-between items-center">
+                <a href="#" onclick="switchModal('loginModal', 'registerModal')" class="text-sm text-blue-500 hover:underline">  {% if request.LANGUAGE_CODE == 'ar' %}
+                    ليس لديك حساب؟
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Vous n'avez pas de compte ?
+                {% else %}
+                    Don't have an account?
+                {% endif %}</a>
+                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">{% if request.LANGUAGE_CODE == 'ar' %}
+                    تسجيل الدخول
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Connexion
+                {% else %}
+                    Login
+                {% endif %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <!-- Register Modal -->
+<div id="registerModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="relative bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <button onclick="toggleModal('registerModal')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4"> {% if request.LANGUAGE_CODE == 'ar' %}
+            تسجيل
+        {% elif request.LANGUAGE_CODE == 'fr' %}
+            S'inscrire
+        {% else %}
+            Register
+        {% endif %}</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                    اسم المستخدم
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Nom d'utilisateur
+                {% else %}
+                    Username
+                {% endif %}</label>
+                <input type="text" name="username" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                    البريد الإلكتروني
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Email
+                {% else %}
+                    Email
+                {% endif %}</label>
+                <input type="email" name="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone_number" class="block text-sm font-medium text-gray-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                    رقم الهاتف
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Numéro de téléphone
+                {% else %}
+                    Phone Number
+                {% endif %}</label>
+                <input type="tel" name="phone_number" id="phone_number" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">{% if request.LANGUAGE_CODE == 'ar' %}
+                    كلمة المرور
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Mot de passe
+                {% else %}
+                    Password
+                {% endif %}</label>
+                <input type="password" name="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="confirm_password" class="block text-sm font-medium text-gray-700"> {% if request.LANGUAGE_CODE == 'ar' %}
+                    تأكيد كلمة المرور
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Confirmer le mot de passe
+                {% else %}
+                    Confirm Password
+                {% endif %}</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="flex justify-between items-center">
+                <a href="#" onclick="switchModal('registerModal', 'loginModal')" class="text-sm text-blue-500 hover:underline"> {% if request.LANGUAGE_CODE == 'ar' %}
+                    لديك بالفعل حساب؟
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Vous avez déjà un compte?
+                {% else %}
+                    Already have an account?
+                {% endif %}</a>
+                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">{% if request.LANGUAGE_CODE == 'ar' %}
+                    التسجيل
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    S'inscrire
+                {% else %}
+                    Register
+                {% endif %}</button>
+            </div>
+        </form>
+    </div> 
+</div>
+    {% if messages %}
+    <div id="messageModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="relative bg-white p-4 rounded-lg shadow-lg max-w-sm w-full">
+            <button onclick="closeModal('messageModal')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <ul class="space-y-2">
+                {% for message in messages %}
+                    <li class="p-2 text-sm text-white bg-red-500 rounded">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+<footer class="bg-red-700 rounded- py-8 mt-8">
+    <div class="container mx-auto text-white px-6 md:flex-row px-5 flex flex-col md:flex-row items-center justify-between">
+        <div class="flex flex-col items-center">
+            <img src="{% static 'images/footer.png' %}" alt="" class="h-24">
+            <div class="flex space-x-10 mt-4">
+                <a href="https://www.facebook.com/RedRoyTheater" class="text-3xl"><i class="ri-facebook-box-fill text-3xl"></i></a>
+                <a href="https://www.instagram.com/redroy_theater/" class="text-3xl"><i class="ri-instagram-fill text-3xl"></i></a>
+                <a href="https://www.youtube.com/@redroy1" class="text-3xl"><i class="ri-youtube-fill text-3xl"></i></a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between md:space-x-20 mt-4 md:mt-0">
+            <!-- Add content as needed -->
+        </div>
+        <div class="flex flex-col mt-4 md:mt-0">
+            <form action="">
+                <input type="text" placeholder="Subscribe now" class="flex-1 py-2 px-6 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-slate-900">
+                <button class="bg-red-500 text-white rounded-full py-2 px-6 hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">Subscribe</button>
+            </form>
+            <div class="mt-5 md:block">
+                Copyright &copy; 2024, all rights reserved
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    // Wrap the script inside a DOMContentLoaded event listener
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if the languageSelect element exists
+        var languageSelect = document.getElementById('languageSelect');
+        if (languageSelect) {
+            // Add event listener only if languageSelect exists
+            languageSelect.addEventListener('change', function() {
+                document.getElementById('languageForm').submit(); // Automatically submit the form when a language is selected
+            });
+        }
+    });
+</script>
+
+<script>
+    let prevScrollPos = window.pageYOffset;
+    const header = document.getElementById("header");
+  
+    window.onscroll = function() {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollPos > currentScrollPos) {
+        header.classList.remove("hidden", "bg-transparentt");
+      } else {
+        header.classList.add("hidden", "bg-transparent");
+      }
+      prevScrollPos = currentScrollPos;
+    }
+  </script>
+    <script>
+        function submitForm() {
+            var form = document.getElementById("registerForm");
+            var name = form.elements["name"].value;
+            var email = form.elements["email"].value;
+            var phone = form.elements["phone"].value;
+            var password = form.elements["password"].value;
+            var confirm_password = form.elements["confirm_password"].value;
+        
+            // Check if passwords match
+            if (password !== confirm_password) {
+                alert("Passwords do not match");
+                return;
+            }
+        
+            // Construct JSON data to send to the server
+            var data = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                confirm_password: confirm_password
+            };
+        
+            // Send the data to the server using AJAX
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful registration
+                console.log(data);
+                window.location.href = data.redirect_url; // Redirect to the specified URL
+            })
+            .catch(error => {
+                // Handle error
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+        </script>
+        
+    <script>
+        function toggleModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal.style.display === "none" || modal.style.display === "") {
+                modal.style.display = "flex";
+            } else {
+                modal.style.display = "none";
+            }
+        }
+
+        function switchModal(currentModalId, newModalId) {
+            document.getElementById(currentModalId).style.display = "none";
+            document.getElementById(newModalId).style.display = "flex";
+        }
+    </script>
+    <script>
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    
+        // Automatically show the modal if it exists
+        window.onload = function() {
+            var modal = document.getElementById('messageModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+
+</body>
+</html>

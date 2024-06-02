@@ -1,0 +1,87 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Confirmation</title>
+  <style>
+    /* Body styles */
+    body {
+      background-color: #f3f4f6; /* Slate 700 */
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header styles */
+    .header {
+      background-image: url('header_bg.jpg'); /* Replace 'header_bg.jpg' with the actual image path */
+      background-size: cover;
+      background-position: center;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    /* Container styles */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff; /* White */
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Heading styles */
+    h1 {
+      color: #dc2626; /* Red */
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* QR code styles */
+    .qr-code {
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      margin-top: 20px;
+    }
+
+    /* Text styles */
+    p {
+      color: #1f2937; /* Slate 900 */
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with background image -->
+  <div class="header">
+    <img src="{% static 'images/mailinfo.png'%}" alt="Red Roy  Logo"> 
+  </div>
+
+  <!-- Reservation details -->
+  <div class="container">
+    <h1>Red Roy Cinema Reservation Confirmation</h1>
+    <div class="reservation-details">
+      <p><strong>Places:</strong> {{ reservation.places }}</p>
+      <p><strong>Date:</strong> {{ reservation.date }}</p>
+      <p><strong>Time:</strong> {{ reservation.time }}</p>
+      <p><strong>Association:</strong> {{ reservation.association }}</p>
+      <p><strong>Phone:</strong> {{ reservation.phone }}</p>
+      <p><strong>Espace:</strong> {{ reservation.espace }}</p>
+    </div>
+    <img src="cid:reservation_qr" alt="QR Code" class="qr-code">
+    <p>Thank you for your reservation. Please present this email at the cinema for validation. Enjoy your movie!</p>
+  </div>
+
+</body>
+</html>
