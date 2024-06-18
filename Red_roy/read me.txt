@@ -1,0 +1,12 @@
+to run the server : go to elevate and run :
+python manage.py runserver 
+in other cmd:
+go to elevate
+python manage.py tailwind start 
+
+
+to accidate to the admin page :just click on the admin mail
+
+admin_login:adminv8redroy@gmail.com
+pass:admin
+
