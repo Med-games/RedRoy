@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fq*fue=k%i!ro@9x6x)9fgdrmu^y=o*4fo17!8nm5&(3+lurd5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -61,7 +61,7 @@ TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = "/usr/bin/npm"
 ROOT_URLCONF = 'elevate.urls'
 
 TEMPLATES = [
