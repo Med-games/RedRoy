@@ -20,9 +20,24 @@
     <div class="" style="display: block;">
         
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center" style="display: flex;align-items: center;width: 100%;">
-            <h1 class="font-bold text-2xl md:text-5xl g-gray-200 text-red-500 p-8 rounded-lg shadow">مسرح ريد روي</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6">مسرح ريد روي هو فضاء ثقافي متعدد الأنشطة، يضم مسرحًا للعروض الفنية، قاعة سينما لعرض الأفلام، ومقهى اجتماعي. يوفر المقهى مساحة للتلاقي والنقاش، مما يخلق بيئة محفزة للتفاعل والتبادل الثقافي.
-            </p> <!-- Adjusted text size for smaller screens -->
+            <h1 class="font-bold text-2xl md:text-5xl g-gray-200 text-red-500 p-8 rounded-lg shadow">               
+            {% if request.LANGUAGE_CODE == 'ar' %}
+                مسرح ريد روي
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Théâtre Red Roy
+            {% else %}
+                Red Roy Theater
+            {% endif %}
+        </h1></h1> <!-- Adjusted text size for smaller screens -->
+        <p class="text-sm md:text-base pl-6">
+            {% if request.LANGUAGE_CODE == 'ar' %}
+                مسرح ريد روي هو فضاء ثقافي متعدد الأنشطة، يضم مسرحًا للعروض الفنية، قاعة سينما لعرض الأفلام، ومقهى اجتماعي. يوفر المقهى مساحة للتلاقي والنقاش، مما يخلق بيئة محفزة للتفاعل والتبادل الثقافي.
+            {% elif request.LANGUAGE_CODE == 'fr' %}
+                Le Théâtre Red Roy est un espace culturel polyvalent qui comprend une scène pour des spectacles artistiques, une salle de cinéma pour la projection de films et un café social. Le café offre un espace de rencontre et de discussion, créant un environnement propice aux interactions et échanges culturels.
+            {% else %}
+                Red Roy Theater is a multi-purpose cultural space featuring a theater for artistic performances, a cinema hall for film screenings, and a social café. The café provides a space for gatherings and discussions, fostering an environment of cultural interaction and exchange.
+            {% endif %}
+        </p>
         </div>
     </div>
     <div class="container mx-auto flex flex-col md:flex-row bg-gradient-to-r from-red-500 to-gray-100 rounded-md hover:scale-105 transition ease" style="
@@ -30,8 +45,25 @@
     align-items: center;
 ">
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
-            <h1 class="font-bold text-2xl md:text-5xl  "> المقهى الاجتماعي</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">مكان مفتوح للنقاشات الحرة والتفاعل بين الجمهور والفنانين، بالإضافة إلى الأنشطة الثقافية غير الرسمية.</p> <!-- Adjusted text size for smaller screens -->
+            <h1 class="font-bold text-2xl md:text-5xl">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    المقهى الاجتماعي
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Le Café Social
+                {% else %}
+                    The Social Café
+                {% endif %}
+            </h1>
+            <p class="text-sm md:text-base pl-6" style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    مكان مفتوح للنقاشات الحرة والتفاعل بين الجمهور والفنانين، بالإضافة إلى الأنشطة الثقافية غير الرسمية.
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Un espace ouvert pour des discussions libres et des interactions entre le public et les artistes, en plus d'activités culturelles informelles.
+                {% else %}
+                    An open space for free discussions and interactions between the audience and artists, as well as informal cultural activities.
+                {% endif %}
+            </p>
+        
         </div>
         <div class="md:w-1/2 flex items-center" style="
     width: 500px;
@@ -49,9 +81,25 @@
            <img src="{% static 'images/discover.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
         </div>
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
-            <h1 class="font-bold text-2xl md:text-5xl  ">  العروض المسرحية</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">تنظيم مسرحيات وعروض أدائية متنوعة تجمع بين الفن الكلاسيكي والمعاصر.
-            </p> <!-- Adjusted text size for smaller screens -->
+            <h1 class="font-bold text-2xl md:text-5xl">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    العروض المسرحية
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Spectacles Théâtraux
+                {% else %}
+                    Theatrical Performances
+                {% endif %}
+            </h1>
+            <p class="text-sm md:text-base pl-6" style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    تنظيم مسرحيات وعروض أدائية متنوعة تجمع بين الفن الكلاسيكي والمعاصر.
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Organisation de pièces de théâtre et de performances artistiques variées, alliant art classique et contemporain.
+                {% else %}
+                    Hosting diverse theatrical plays and performances blending classical and contemporary art.
+                {% endif %}
+            </p>
+       </p> 
         </div>
 
     </div>
@@ -59,9 +107,24 @@
     justify-content: right;
 ">
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
-            <h1 class="font-bold text-2xl md:text-5xl  "> ورش عمل تدريبية</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;"> ورش متخصصة في الفنون الأدائية، مثل التمثيل، الإخراج، وتحويل الشخصية المسرحية.
-            </p> <!-- Adjusted text size for smaller screens -->
+            <h1 class="font-bold text-2xl md:text-5xl">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    ورش عمل تدريبية
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Ateliers de Formation
+                {% else %}
+                    Training Workshops
+                {% endif %}
+            </h1>
+            <p class="text-sm md:text-base pl-6" style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    ورش متخصصة في الفنون الأدائية، مثل التمثيل، الإخراج، وتحويل الشخصية المسرحية.
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Ateliers spécialisés dans les arts de la scène, tels que le jeu d'acteur, la mise en scène et la transformation de personnages théâtraux.
+                {% else %}
+                    Specialized workshops in performing arts, such as acting, directing, and character transformation.
+                {% endif %}
+            </p>
         </div>
         <div class="md:w-1/2 flex items-center" style="
     width: 500px;
@@ -80,9 +143,24 @@
            <img src="{% static 'images/culture.png' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
         </div>
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
-            <h1 class="font-bold text-2xl md:text-5xl  ">   اللقاءات الثقافية</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">تنظيم لقاءات وندوات لمناقشة قضايا ثقافية واجتماعية مع رواد الفكر والفن.
-            </p> <!-- Adjusted text size for smaller screens -->
+            <h1 class="font-bold text-2xl md:text-5xl">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    اللقاءات الثقافية
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Rencontres Culturelles
+                {% else %}
+                    Cultural Meetups
+                {% endif %}
+            </h1>
+            <p class="text-sm md:text-base pl-6" style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    تنظيم لقاءات وندوات لمناقشة قضايا ثقافية واجتماعية مع رواد الفكر والفن.
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Organisation de rencontres et de séminaires pour discuter de questions culturelles et sociales avec des intellectuels et des artistes renommés.
+                {% else %}
+                    Organizing meetups and seminars to discuss cultural and social issues with leading thinkers and artists.
+                {% endif %}
+            </p>
         </div>
 
     </div>
@@ -91,9 +169,24 @@
     justify-content: right;
 ">
         <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
-            <h1 class="font-bold text-2xl md:text-5xl  ">  عروض سينمائية</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">عرض أفلام محلية ودولية، مع جلسات مناقشة للأفلام بعد العروض.</p> <!-- Adjusted text size for smaller screens -->
-        </div>
+            <h1 class="font-bold text-2xl md:text-5xl">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    عروض سينمائية
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Projections Cinématographiques
+                {% else %}
+                    Film Screenings
+                {% endif %}
+            </h1>
+            <p class="text-sm md:text-base pl-6" style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">
+                {% if request.LANGUAGE_CODE == 'ar' %}
+                    عرض أفلام محلية ودولية، مع جلسات مناقشة للأفلام بعد العروض.
+                {% elif request.LANGUAGE_CODE == 'fr' %}
+                    Projection de films locaux et internationaux, suivie de sessions de discussion après les projections.
+                {% else %}
+                    Screening local and international films, with post-screening discussion sessions.
+                {% endif %}
+            </p>        </div>
         <div class="md:w-1/2 flex items-center" style="
     width: 500px;
     justify-content: right;
