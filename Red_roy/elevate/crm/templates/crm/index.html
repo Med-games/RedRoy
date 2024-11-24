@@ -15,35 +15,93 @@
     <img src="{% static 'images/ledled.png' %}" alt="" class="w-full">
 </div>
 
-<section class="discover flex flex-col items-center py-12" id="discover">
+<section class="discover flex flex-col items-center py-12" id="discover" >
     <img src="{% static 'images/header (2).png' %}" alt="" class="w-80 md:w-96 mb-12"> <!-- Adjusted image width for smaller screens -->
-    <div class="container mx-auto flex flex-col space-y-6 md:flex-row bg-gradient-to-r from-red-500 to-gray-100 rounded-md hover:scale-105 transition ease">
-        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
-            <h1 class="font-bold text-2xl md:text-5xl  ">Red Roy Cofee</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6 "style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">our Cultural Café offers a sanctuary where the rich aroma of freshly brewed coffee mingles harmoniously with the essence of culture and creativity. Here, you can indulge in artisanal brews from around the globe, savor cultural concoctions that ignite the senses, and lose yourself in a world of literature and art. With a diverse array of cultural events and a welcoming community of like-minded enthusiasts</p> <!-- Adjusted text size for smaller screens -->
-        </div>
-        <div class="md:w-1/2 flex justify-center items-center">
-            <img src="{% static 'images/cofee.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105" >
-        </div>
-    </div>
-    <div class="container mx-auto flex flex-col space-y-6 md:flex-row mt-3 bg-gradient-to-r from-amber-200 to-red-500  rounded-md  hover:scale-105 transition ease">
-        <div class="md:w-1/2 flex justify-center items-center">
-            <img src="{% static 'images/discover.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md" >
-        </div>
-        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
-            <h1 class="font-bold text-2xl md:text-5xl">Red Roy Theatre</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6">where the stage comes alive with captivating spectacles and mesmerizing one-man shows. Our intimate theatre space is a sanctuary for theatrical exploration and artistic expression, offering an immersive experience that transcends boundaries and sparks the imagination. From gripping solo performances to compelling theatrical masterpieces, every show promises an unforgettable journey into the realm of storytelling and emotion. Join us for an evening of entertainment, enlightenment, and inspiration at [Your Theatre's Name], where the magic of theatre awaits.</p> <!-- Adjusted text size for smaller screens -->
+    <div class="" style="display: block;">
+        
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center" style="display: flex;align-items: center;width: 100%;">
+            <h1 class="font-bold text-2xl md:text-5xl g-gray-200 text-red-500 p-8 rounded-lg shadow">مسرح ريد روي</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6">مسرح ريد روي هو فضاء ثقافي متعدد الأنشطة، يضم مسرحًا للعروض الفنية، قاعة سينما لعرض الأفلام، ومقهى اجتماعي. يوفر المقهى مساحة للتلاقي والنقاش، مما يخلق بيئة محفزة للتفاعل والتبادل الثقافي.
+            </p> <!-- Adjusted text size for smaller screens -->
         </div>
     </div>
-    <div class="container mx-auto flex flex-col space-y-6 md:flex-row bg-gradient-to-r from-red-400 to-cyan-500 mt-5 rounded-lg hover:scale-105 transition ease">
-        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center md:text-left">
-            <h1 class="font-bold text-2xl md:text-5xl">Red Roy Cinema</h1> <!-- Adjusted text size for smaller screens -->
-            <p class="text-sm md:text-base  pl-6"> where every film becomes an unforgettable experience. Step into our state-of-the-art theater, where the silver screen comes alive with the latest blockbusters, timeless classics, and captivating indie gems. From heart-pounding action to heartwarming dramas, our diverse lineup promises something for every movie enthusiast. Immerse yourself in crystal-clear visuals and surround sound, as you lose yourself in the magic of storytelling. Whether you're seeking thrills, laughter, or tears, [Your Cinema's Name] Cinema invites you to sit back, relax, and let the magic of the movies transport you to new worlds and unforgettable adventures. Welcome to a place where every frame is a masterpiece and every visit is a celebration of cinema..</p> <!-- Adjusted text size for smaller screens -->
+    <div class="container mx-auto flex flex-col md:flex-row bg-gradient-to-r from-red-500 to-gray-100 rounded-md hover:scale-105 transition ease" style="
+    justify-content: right;
+    align-items: center;
+">
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
+            <h1 class="font-bold text-2xl md:text-5xl  "> المقهى الاجتماعي</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">مكان مفتوح للنقاشات الحرة والتفاعل بين الجمهور والفنانين، بالإضافة إلى الأنشطة الثقافية غير الرسمية.</p> <!-- Adjusted text size for smaller screens -->
         </div>
-        <div class="md:w-1/2 flex justify-center items-center">
-            <img src="{% static 'images/Red roy cinema.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md" >
+        <div class="md:w-1/2 flex items-center" style="
+    width: 500px;
+    justify-content: right;
+">
+            <img src="/static/images/cofee.jfif" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
         </div>
     </div>
+    <div class="container mx-auto flex flex-col space-y-6 md:flex-row mt-3 bg-gradient-to-r from-amber-200 to-red-500  rounded-md  hover:scale-105 transition ease" style="
+    justify-content: left;
+">        <div class="md:w-1/2 flex items-center" style="
+    width: 500px;
+    justify-content: left;
+">
+           <img src="{% static 'images/discover.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
+        </div>
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
+            <h1 class="font-bold text-2xl md:text-5xl  ">  العروض المسرحية</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">تنظيم مسرحيات وعروض أدائية متنوعة تجمع بين الفن الكلاسيكي والمعاصر.
+            </p> <!-- Adjusted text size for smaller screens -->
+        </div>
+
+    </div>
+    <div class="container mx-auto flex flex-col  md:flex-row bg-gradient-to-r from-red-400 to-cyan-500 mt-5 rounded-lg hover:scale-105 transition ease" style="
+    justify-content: right;
+">
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
+            <h1 class="font-bold text-2xl md:text-5xl  "> ورش عمل تدريبية</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;"> ورش متخصصة في الفنون الأدائية، مثل التمثيل، الإخراج، وتحويل الشخصية المسرحية.
+            </p> <!-- Adjusted text size for smaller screens -->
+        </div>
+        <div class="md:w-1/2 flex items-center" style="
+    width: 500px;
+    justify-content: right;
+">
+            <img src="/static/images/warcha.png" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
+        </div>
+    </div>
+
+    <div class="container mx-auto flex flex-col space-y-6 md:flex-row mt-3 bg-gradient-to-r from-amber-200 to-red-500  rounded-md  hover:scale-105 transition ease" style="
+    justify-content: left;
+">        <div class="md:w-1/2 flex items-center" style="
+    width: 500px;
+    justify-content: left;
+">
+           <img src="{% static 'images/culture.png' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
+        </div>
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
+            <h1 class="font-bold text-2xl md:text-5xl  ">   اللقاءات الثقافية</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">تنظيم لقاءات وندوات لمناقشة قضايا ثقافية واجتماعية مع رواد الفكر والفن.
+            </p> <!-- Adjusted text size for smaller screens -->
+        </div>
+
+    </div>
+
+    <div class="container mx-auto flex flex-col md:flex-row bg-gradient-to-r mt-3 from-red-500 to-gray-100 rounded-md hover:scale-105 transition ease" style="
+    justify-content: right;
+">
+        <div class="md:w-1/2 flex flex-col space-y-5 py-8 text-center">
+            <h1 class="font-bold text-2xl md:text-5xl  ">  عروض سينمائية</h1> <!-- Adjusted text size for smaller screens -->
+            <p class="text-sm md:text-base  pl-6 " style="font-family: 'Lateef', 'Arial', sans-serif; line-height: 1.5;">عرض أفلام محلية ودولية، مع جلسات مناقشة للأفلام بعد العروض.</p> <!-- Adjusted text size for smaller screens -->
+        </div>
+        <div class="md:w-1/2 flex items-center" style="
+    width: 500px;
+    justify-content: right;
+">
+            <img src="{% static 'images/Red roy cinema.jfif' %}" alt="" class="w-2/3 h-auto border-2 border-red-500 rounded-md transition ease hover:scale-105">
+        </div>
+    </div>
+    
 </section>
 
 <section class="cards contact py-12 bg-white text-gray-900" id="contact">
